@@ -1,6 +1,4 @@
-git commit -am "Add a full_title helper"
-$ git switch main
-$ git merge rails-flavored-rubyclass StaticPagesController < ApplicationController
+class StaticPagesController < ApplicationController
   def home
   end
 
