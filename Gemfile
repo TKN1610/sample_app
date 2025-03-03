@@ -3,6 +3,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.2.6'
 
+gem "active_storage_validations", "0.9.8"
+gem "image_processing",           "1.12.2"
 gem 'bcrypt',          '3.1.18'
 gem "faker",           "2.21.0"
 gem "will_paginate",           "3.3.1"
@@ -19,6 +21,7 @@ gem 'sprockets-rails', '3.4.2'
 gem 'stimulus-rails',  '1.2.1'
 gem 'turbo-rails',     '1.4.0'
 gem 'sqlite3','1.6.1'
+
 
 group :development, :test do
   gem 'debug', '1.7.1', platforms: %i[mri mingw x64_mingw]
@@ -44,6 +47,7 @@ group :test do
 end
 
 group :production do
+  gem "aws-sdk-s3", "1.114.0", require: false
   gem 'pg', '1.3.5'
 end
 
