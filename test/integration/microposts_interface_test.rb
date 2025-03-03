@@ -18,7 +18,7 @@ class ImageUploadTest < MicropostsInterface
   # **画像が正しくアップロードされるかをテスト**
   test "should be able to attach an image" do
     cont = "This micropost really ties the room together."
-    img = fixture_file_upload(Rails.root.join('test/fixtures/files/kitten.jpg'), 'image/jpeg')
+    img = Rack::Test::UploadedFile.new(Rails.root.join('test/fixtures/files/kitten.jpg'), 'image/jpeg')
 
     # マイクロポストを投稿
     post microposts_path, params: { micropost: { content: cont, image: img } }
