@@ -7,6 +7,7 @@ class UsersProfileTest < ActionDispatch::IntegrationTest
     @user = users(:michael)
     @other_user = users(:archer)
     log_in_as(@user)
+    @user.follow(@other_user)
   end
 
   test "profile display" do

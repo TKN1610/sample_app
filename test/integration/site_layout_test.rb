@@ -5,6 +5,7 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
     @user = users(:michael) # fixture で用意したユーザー
     @other_user = users(:archer) # もう一人のユーザー
     log_in_as(@user) # テスト用ログインヘルパー
+    @user.follow(@other_user)
   end
 
   test "home page displays stats" do
