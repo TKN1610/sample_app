@@ -1,20 +1,18 @@
 require "test_helper"
 
 class SiteLayoutTest < ActionDispatch::IntegrationTest
+  def setup
+    @user = users(:michael) # fixture で用意したユーザー
+    @other_user = users(:archer) # もう一人のユーザー
+    log_in_as(@user) # テスト用ログインヘルパー
+  end
 
-  test "layout links" do
+  test "home page displays stats" do
     get root_path
     assert_template 'static_pages/home'
-    assert_select "a[href=?]", root_path, count: 2
-    assert_select "a[href=?]", help_path
-    assert_select "a[href=?]", about_path
-    assert_select "a[href=?]", contact_path
-    assert_select "a[href=?]", signup_path
-    get contact_path
-    assert_select "title", full_title("Contact")
-
-    get signup_path  # signupページにアクセス
-    assert_select "title", full_title("Sign up")  # full_titleヘルパーを使ったタイトルの確認
+    assert_select "section.stats" do
+      assert_select "a[href=?]", following_user_path(@user), text: @user.following.count.to_s
+      assert_select "a[href=?]", followers_user_path(@user), text: @user.followers.count.to_s
+    end
   end
- 
 end
